@@ -13,8 +13,9 @@ if (mysqli_num_rows($result) > 0)
 	 $output = '<table class="table table-hover">
                 <thead>
                   <tr class="table-primary">
-                    <th scope="col">ID</th>
+                    <th scope="col" style= "width: 300px;">ID</th>
                     <th scope="col">Name</th>
+                    <th scope="col" style= "width: 200px;">Action</th>
                   </tr>
                 </thead>';
 
@@ -24,6 +25,8 @@ if (mysqli_num_rows($result) > 0)
                                <tr class='table-Default'>
                                  <td>{$row['id']}.</td>
                                  <td>{$row['first_name']} {$row['last_name']}</td>
+                                 <td><button class='btn btn-link' id= 'delete-btn' style='color: red;' 
+                                             data-id='{$row['id']}'>Delete</button></td>
                                </tr>
                              </tbody>";   
                 }

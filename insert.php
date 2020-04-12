@@ -2,8 +2,22 @@
 <?php include("header.php"); ?>
 
   <div class="container" style="padding-top: 10px;">
-     <div class="jumbotron shadow">
-          <form id = "addform">
+
+  <div id="table-data" style="padding-top: 25px;"></div>
+
+</div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="index.php">Add Record : </a>
+       <div class="collapse navbar-collapse" id="navbarColor01">
+   
+    
+  </div>
+  </nav>
+<div class="container" style="padding-top: 10px;">
+
+
+  <div class="jumbotron shadow" style="padding-top: 35px;">
+        <form id = "addform">
               <label for="staticEmail" class="col-sm-2 col-form-label">First Name : </label>
                      <div class="col-sm-10">
                          <input type="text" class="form-control-plaintext" id="fname">
@@ -20,12 +34,10 @@
 
            <div id="error-message"></div> 
            <div id="success-message"></div>
-
-      </div>
+  </div>
      
 
-      <div style="padding-top: 25px;" id="table-data">
-      </div>  
+        
   </div>
 
 <div style="padding-top: 225px;">
@@ -93,19 +105,34 @@ $(document).ready(function(){
    })
 
 
+$(document).on('click', '#delete-btn', function() {
+  if (confirm('Are you sure ?')) {
+    var studentid = $(this).data("id");
+    var element = this;
 
+
+    $.ajax({
+           url: 'ajax-delete',
+           type: 'POST',
+           data: {id: studentid},
+           success: function(data){
+           if (data == 1) 
+             {
+               $(element).closest('tr').fadeOut();
+               $("#success-message").html("Record Delete successfully.").slideDown();
+               $("#error-message").slideUp();
+             }
+         else
+             {
+               $("#error-message").html("Can't Delete records.").slideDown();
+               $("#success-message").slideUp();
+             }
+          }
+     });
+   }
+});
 
 });
 
-
-  
- 
-
 </script>
-
-
-
-
-
-
 </html>
